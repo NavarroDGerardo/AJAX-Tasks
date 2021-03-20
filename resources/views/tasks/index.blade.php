@@ -42,7 +42,7 @@
                                 <button id="{{$task->id}}" class="terminar" type="button" value="Terminar">Terminar</button>
                             </td>
                             <td>
-                                <button id="{{$task->id}}" class="borrar" type="button" value="Terminar">Terminar</button>
+                                <button id="{{$task->id}}" class="borrar" type="button" value="Terminar">borrar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -72,7 +72,7 @@
             let id_res = response.id;
             let des_res = response.description
 
-            $('.table tbody').append('<tr><td>' + id_res  +'</td><td>'+ des_res +'</td><td>Sí</td></tr>')
+            $('.table tbody').append('<tr><td>' + id_res  +'</td><td>'+ des_res +'</td><td>Sí</td> <td><button id="'+id_res+'" class="terminar" type="button" value="Terminar">Terminar</button></td> <td><button id="'+id_res+'" class="borrar" type="button" value="Terminar">Terminar</button></td> </tr>')
 
         })
         .fail(function(jqXHR, response) {
