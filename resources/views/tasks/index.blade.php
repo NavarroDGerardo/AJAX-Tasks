@@ -39,10 +39,10 @@
                                 {{$task->is_done ? 'No' : 'Sí'}}
                             </td>
                             <td>
-                                <button id="{{$task->id}}" class="terminar" type="button" value="Terminar">Terminar</button>
+                                <button id="{{$task->id}}" class="terminar" type="button" value="Terminar" onclick="terminarTarea({{$task->id}})">Terminar</button>
                             </td>
                             <td>
-                                <button id="{{$task->id}}" class="borrar" type="button" value="Terminar">borrar</button>
+                                <button id="{{$task->id}}" class="borrar" type="button" value="Terminar" onclick="borrarTarea({{$task->id}})">borrar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -72,7 +72,7 @@
             let id_res = response.id;
             let des_res = response.description
 
-            $('.table tbody').append('<tr><td>' + id_res  +'</td><td>'+ des_res +'</td><td>Sí</td> <td><button id="'+id_res+'" class="terminar" type="button" value="Terminar">Terminar</button></td> <td><button id="'+id_res+'" class="borrar" type="button" value="Terminar">Terminar</button></td> </tr>')
+            $('.table tbody').append('<tr><td>' + id_res  +'</td><td>'+ des_res +'</td><td id="status_'+ des_res +'">Sí</td> <td><button id="'+id_res+'" class="terminar" type="button" value="Terminar" onclick="terminarTarea('+id_res+')">Terminar</button></td> <td><button id="'+id_res+'" class="borrar" type="button" value="Terminar" onclick="borrarTarea('+id_res+')">borrar</button></td> </tr>')
 
         })
         .fail(function(jqXHR, response) {
@@ -80,8 +80,7 @@
         });
     }
 
-    $(".terminar").click(function() {
-        let idTask = this.id;
+    function terminarTarea(idTask){
         let task_url = '{{ route('tasks.update', 0) }}';
         task_url = task_url.replace('0', idTask);
         //console.log(idTask)
@@ -112,10 +111,9 @@
         .fail(function(jqXHR, response) {
             console.log('Fallido', response);
         });
-    });
+    }
 
-    $(".borrar").click(function() {
-        let idTask = this.id;
+    function borrarTarea(idTask){
         let task_url = '{{ route('tasks.destroy', 0) }}';
         task_url = task_url.replace('0', idTask);
         let id_status = '#status_' + idTask;
@@ -138,7 +136,8 @@
         .fail(function(jqXHR, response) {
             console.log('Fallido', response);
         });
-    });
+    }
+
 </script>
 @endpush
 
